@@ -1,0 +1,9 @@
+{
+  "name": "Locked In",
+  "short_name": "Locked In",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090b08",
+  "theme_color": "#090b08",
+  "description": "Usa i social con intenzione."
+}
