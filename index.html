@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b08">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Locked In">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Locked In</title>
+<style>
+:root{color-scheme:dark;--bg:#090b08;--card:#141811;--card2:#1b2118;--line:#2c3526;--text:#f4f7ef;--muted:#929b89;--lime:#c9ff4a;--red:#ff766c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}.app{max-width:540px;margin:auto;min-height:100dvh;padding:env(safe-area-inset-top) 18px calc(96px + env(safe-area-inset-bottom))}
+header{height:68px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:950;font-size:21px;letter-spacing:-1.5px}.logo span{color:var(--lime)}.live{font-size:10px;color:var(--lime);border:1px solid #526c2d;border-radius:30px;padding:7px 10px;background:#c9ff4a12}
+.page{display:none}.page.active{display:block}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:800}.title{font-size:36px;line-height:1.02;letter-spacing:-1.8px;font-weight:900;margin:12px 0 8px}.title em{font-style:normal;color:var(--lime)}.muted{font-size:13px;line-height:1.5;color:var(--muted)}
+.card{background:linear-gradient(145deg,#192015,#11150f);border:1px solid var(--line);border-radius:22px;padding:17px;margin-top:17px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.card-title{font-size:14px;font-weight:800}.tag{font-size:9px;letter-spacing:1.3px;color:var(--lime);font-weight:800}
+.timer{font-size:58px;font-weight:900;letter-spacing:-4px;color:var(--lime);margin:10px 0}.btn{border:0;border-radius:13px;padding:13px 16px;background:var(--lime);color:#11160a;font-size:12px;font-weight:900}.btn.alt{background:#20291a;color:var(--lime);border:1px solid #3c4b2d}.btn.dark{background:#1a2017;color:var(--text);border:1px solid var(--line)}
+.section{margin-top:27px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.section-head h2{font-size:16px;margin:0}.section-head small{font-size:9px;color:var(--muted);letter-spacing:1px}
+.socials{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.social{border:1px solid var(--line);border-radius:17px;background:var(--card);color:var(--text);text-align:left;padding:13px 11px;min-height:106px;text-decoration:none;display:block}.social .icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:900;margin-bottom:11px}.social strong{font-size:12px}.social small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.instagram{background:linear-gradient(135deg,#7c44bd,#e74f78,#f4a34b)}.youtube{background:#f33}.tiktok{background:#252b31}
+.field{width:100%;background:#0b0e09;border:1px solid #35432b;border-radius:12px;padding:13px;color:var(--text);outline:none}.field:focus{border-color:var(--lime)}.formrow{display:flex;align-items:center;gap:10px;margin-top:12px}.formrow .field{flex:1;min-width:0}
+.item{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px;margin-top:9px}.item strong{font-size:13px}.item p{font-size:11px;color:var(--muted);line-height:1.45;margin:5px 0 0}
+.progress{height:7px;border-radius:20px;background:#303a29;overflow:hidden;margin-top:15px}.progress>span{height:100%;display:block;width:0;background:var(--lime);border-radius:20px;transition:width .2s}
+.notice{font-size:10px;line-height:1.5;color:#c7ba91;background:#1b190f;border:1px solid #4b3e20;border-radius:14px;padding:12px;margin-top:15px}
+nav{position:fixed;z-index:5;bottom:0;left:50%;transform:translateX(-50%);width:min(540px,100%);padding:9px 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);background:#0b0e09ed;backdrop-filter:blur(20px);border-top:1px solid var(--line)}nav button{border:0;background:none;color:#7c8674;font-size:10px;padding:7px}nav button.active{color:var(--lime)}nav i{display:block;font-size:18px;font-style:normal;margin-bottom:3px}
+.toast{position:fixed;z-index:9;bottom:88px;left:50%;transform:translateX(-50%);padding:10px 15px;border-radius:30px;background:var(--lime);color:#10150a;font-size:12px;font-weight:900;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
+@media(min-width:600px){body{padding:20px 0}.app{border:1px solid #252e20;border-radius:28px;min-height:850px}nav{bottom:20px;border:1px solid var(--line);border-radius:0 0 28px 28px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">LOCKED <span>IN.</span></div><div class="live">● IL TUO SPAZIO</div></header>
+<main>
+<section class="page active" id="home">
+<div class="eyebrow">RIPRENDI IL CONTROLLO</div>
+<div class="title">Meno scroll.<br><em>Più vita.</em></div>
+<div class="muted">Usa i social con intenzione. Scegli tu quando iniziare e quando fermarti.</div>
+<div class="card">
+ <div class="row"><div class="card-title">Sessione Focus</div><div class="tag" id="timerStatus">PRONTO</div></div>
+ <div class="timer" id="timer">25:00</div>
+ <div class="row"><button class="btn" id="timerButton" onclick="toggleTimer()">Avvia 25 minuti</button><button class="btn alt" onclick="resetTimer()">Reset</button></div>
+ <div class="progress"><span id="timerProgress"></span></div>
+ <div class="muted" style="margin-top:10px">Puoi mettere in pausa o terminare la sessione in qualsiasi momento.</div>
+</div>
+<div class="section">
+ <div class="section-head"><h2>Apri i tuoi social</h2><small>COLLEGAMENTI DIRETTI</small></div>
+ <div class="socials">
+  <a class="social" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="icon instagram">◎</span><strong>Instagram</strong><small>Apri Instagram</small></a>
+  <a class="social" href="https://m.youtube.com/" target="_blank" rel="noopener"><span class="icon youtube">▶</span><strong>YouTube</strong><small>Apri YouTube</small></a>
+  <a class="social" href="https://www.tiktok.com/" target="_blank" rel="noopener"><span class="icon tiktok">♪</span><strong>TikTok</strong><small>Apri TikTok</small></a>
+ </div>
+</div>
+<div class="section card">
+ <div class="row"><div><div class="card-title">Obiettivo quotidiano</div><div class="muted" style="margin-top:4px">Il limite che vuoi rispettare</div></div><button class="btn alt" onclick="showPage('limits')">Modifica</button></div>
+ <div class="row" style="margin-top:14px"><span class="muted">Tempo obiettivo</span><strong id="goalSummary">90 minuti</strong></div>
+</div>
+<div class="notice">Limite tecnico attuale: i collegamenti aprono i siti ufficiali. Una PWA non può nascondere Reels/Shorts dentro le app originali né imporre blocchi di sistema su iPhone. Questa build non dichiara di farlo.</div>
+</section>
+<section class="page" id="limits">
+<div class="eyebrow">LE TUE REGOLE</div><div class="title">Imposta i tuoi<br><em>limiti.</em></div><div class="muted">Personalizza la tua routine. Le preferenze vengono salvate su questo dispositivo.</div>
+<div class="card"><div class="card-title">Obiettivo giornaliero</div><div class="muted" style="margin-top:5px">Minuti che vuoi dedicare ai social</div><div class="formrow"><input class="field" id="goalInput" type="number" min="5" max="1440" value="90"><button class="btn" onclick="saveGoal()">Salva</button></div></div>
+<div class="card"><div class="card-title">Durata sessione Focus</div><div class="muted" style="margin-top:5px">Scegli la durata predefinita del timer</div><div class="formrow"><select class="field" id="durationInput"><option value="15">15 minuti</option><option value="25" selected>25 minuti</option><option value="45">45 minuti</option><option value="60">60 minuti</option></select><button class="btn" onclick="saveDuration()">Salva</button></div></div>
+<div class="item"><strong>Promemoria</strong><p>Il timer ti aiuta a dedicare un intervallo preciso alla concentrazione. Non misura l'utilizzo delle altre app.</p></div>
+</section>
+<section class="page" id="progress">
+<div class="eyebrow">COSTANZA, NON PERFEZIONE</div><div class="title">La tua<br><em>costanza.</em></div>
+<div class="card"><div class="card-title">Sessioni completate su questo dispositivo</div><div class="timer" id="completedCount">0</div><div class="muted">Sessioni Focus concluse con il timer.</div></div>
+<div class="item"><strong>Tempo di concentrazione</strong><p id="focusTotal">0 minuti completati</p></div>
+<div class="item"><strong>Obiettivo giornaliero</strong><p id="progressGoal">90 minuti · impostazione personale</p></div>
+</section>
+<section class="page" id="settings">
+<div class="eyebrow">IMPOSTAZIONI</div><div class="title">Il tuo<br><em>Locked In.</em></div>
+<div class="item"><strong>Installazione su iPhone</strong><p>Quando il sito sarà pubblicato su HTTPS: aprilo in Safari, tocca Condividi e scegli “Aggiungi alla schermata Home”.</p></div>
+<div class="item"><strong>Dati e privacy</strong><p>Timer, obiettivo e statistiche vengono conservati localmente nel browser. Non viene richiesto il login ai social.</p></div>
+<div class="item"><strong>Versione</strong><p>0.4 · Web app progressiva · Italiano</p></div>
+</section>
+</main>
+</div>
+<nav>
+<button class="active" data-page="home" onclick="showPage('home',this)"><i>⌂</i>Home</button>
+<button data-page="limits" onclick="showPage('limits',this)"><i>◷</i>Limiti</button>
+<button data-page="progress" onclick="showPage('progress',this)"><i>↗</i>Progressi</button>
+<button data-page="settings" onclick="showPage('settings',this)"><i>⚙</i>Impostazioni</button>
+</nav>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const get=(k,d)=>{try{const v=localStorage.getItem('li-'+k);return v===null?d:JSON.parse(v)}catch(e){return d}};
+const put=(k,v)=>localStorage.setItem('li-'+k,JSON.stringify(v));
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo(0,0);if(id==='progress')renderStats()}
+let duration=get('duration',25),remaining=duration*60,interval=null;
+function renderTimer(){$('timer').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');$('timerProgress').style.width=((duration*60-remaining)/(duration*60)*100)+'%'}
+function toggleTimer(){if(interval){clearInterval(interval);interval=null;$('timerButton').textContent='Riprendi';$('timerStatus').textContent='IN PAUSA';toast('Sessione in pausa');return}if(remaining<=0)remaining=duration*60;interval=setInterval(()=>{remaining--;renderTimer();if(remaining<=0){clearInterval(interval);interval=null;let n=get('completed',0)+1;put('completed',n);put('totalMinutes',get('totalMinutes',0)+duration);$('timerButton').textContent='Avvia nuova sessione';$('timerStatus').textContent='COMPLETATA';toast('Sessione completata!');renderStats()}},1000);$('timerButton').textContent='Metti in pausa';$('timerStatus').textContent='IN CORSO';toast('Sessione avviata')}
+function resetTimer(){clearInterval(interval);interval=null;remaining=duration*60;$('timerButton').textContent='Avvia '+duration+' minuti';$('timerStatus').textContent='PRONTO';renderTimer()}
+function saveGoal(){let n=Math.max(5,Math.min(1440,Number($('goalInput').value)||90));put('goal',n);$('goalSummary').textContent=n+' minuti';$('progressGoal').textContent=n+' minuti · impostazione personale';toast('Obiettivo salvato')}
+function saveDuration(){duration=Number($('durationInput').value)||25;put('duration',duration);resetTimer();toast('Durata aggiornata')}
+function renderStats(){$('completedCount').textContent=get('completed',0);$('focusTotal').textContent=get('totalMinutes',0)+' minuti completati';$('progressGoal').textContent=get('goal',90)+' minuti · impostazione personale'}
+$('goalInput').value=get('goal',90);$('goalSummary').textContent=get('goal',90)+' minuti';$('progressGoal').textContent=get('goal',90)+' minuti · impostazione personale';$('durationInput').value=duration;$('timerButton').textContent='Avvia '+duration+' minuti';renderTimer();renderStats();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body>
+</html>
